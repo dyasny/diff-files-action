@@ -12,6 +12,9 @@ jobs:
   list-changed-files:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
       - name: List changed files
         uses: ./.github/actions/diff-files
         id: diff
