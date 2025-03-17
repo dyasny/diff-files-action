@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -eo
-
 # Input: base branch to compare against
 BASE_BRANCH=$1
 
@@ -20,5 +18,10 @@ else
   echo "$CHANGED_FILES"
 fi
 
-# Set the output for use in other steps
-echo "changed-files=$CHANGED_FILES" >> "$GITHUB_OUTPUT"
+# Set the output with proper multi-line handling
+{
+  echo "changed-files<<EOF"
+  echo "$CHANGED_FILES"
+  echo "EOF"
+} >> "$GITHUB_OUTPUT"
+
